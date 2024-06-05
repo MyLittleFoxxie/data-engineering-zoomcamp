@@ -1,0 +1,4 @@
+.ipynb_checkpoints
+.venv
+ny_taxi_postgres_data
+yellow_tripdata_2024-01.parquet
