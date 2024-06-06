@@ -1,8 +1,9 @@
+LINUX
 python3 -m venv .venv
 
 source .venv/bin/activate
 
-pip install pandas pyarrow sqlalchemy
+pip install pandas pyarrow sqlalchemy psycopg2
 
 docker run -it \
     -e POSTGRES_USER="root" \
@@ -15,3 +16,23 @@ postgres:latest
 sudo chmod -R 777 $(pwd)/ny_taxi_postgres_data
 
 wget https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2024-01.parquet
+
+
+WINDOWS
+python -m venv .venv
+
+.venv\Scripts\activate
+
+pip install pandas pyarrow sqlalchemy
+
+docker run -it `
+    -e POSTGRES_USER="root" `
+    -e POSTGRES_PASSWORD="root" `
+    -e POSTGRES_DB="ny_taxi" `
+    -v ${PWD}/ny_taxi_postgres_data:/var/lib/postgresql/data `
+    -p 5432:5432 `
+postgres:latest
+
+sudo chmod -R 777 $(pwd)/ny_taxi_postgres_data
+
+curl -o yellow_tripdata_2024-01.parquet https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2024-01.parquet
